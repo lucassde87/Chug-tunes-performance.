@@ -1,3 +1,6 @@
 name = "chug-tunes-order-api"
 main = "worker.js"
 compatibility_date = "2026-09-05"
+
+[secrets]
+required = ["DISCORD_WEBHOOK_URL"]
