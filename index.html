@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="CHUG TUNES PERFORMANCE – Gaming Performance Store">
+<title>CHUG TUNES PERFORMANCE</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <a class="logo" href="#home"><span>CT</span> CHUG TUNES <b>PERFORMANCE</b></a>
+  <nav><a href="#home">Home</a><a href="#products">Produkte</a><a href="#faq">FAQ</a></nav>
+  <button class="cart-btn" id="openCart">🛒 <i id="count">0</i></button>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div>
+    <small>CHUG TUNES PERFORMANCE</small>
+    <h1>LEVEL UP<br><em>YOUR SETUP.</em></h1>
+    <p>Gaming-Optimierungen für Performance, FPS und ein sauber abgestimmtes Setup.</p>
+    <a class="button" href="#products">Produkte ansehen →</a>
+  </div>
+  <div class="hero-box"><div class="glow">CT</div><strong>PERFORMANCE<br>OPTIMIZED</strong></div>
+</section>
+
+<section class="section" id="products">
+  <div class="heading"><div><small>SHOP</small><h2>Produkte</h2></div><p>Wähle dein Performance-Paket.</p></div>
+  <div class="grid">
+    <article class="card">
+      <div class="icon">🎯</div><label>BELIEBT</label><h3>HITREG</h3>
+      <p>Gaming-Optimierungen mit Fokus auf Eingabe, Latenz und ein direktes Spielgefühl.</p>
+      <strong class="price">20 €</strong>
+      <button class="add" data-name="HITREG" data-price="20">In den Warenkorb</button>
+    </article>
+    <article class="card featured">
+      <div class="icon">⚡</div><label>TOP PICK</label><h3>FPS BOOST</h3>
+      <p>Performance-orientierte Windows- und Gaming-Einstellungen für ein flüssigeres Setup.</p>
+      <strong class="price">15 €</strong>
+      <button class="add" data-name="FPS BOOST" data-price="15">In den Warenkorb</button>
+    </article>
+    <article class="card">
+      <div class="icon">⚙️</div><label>SETUP</label><h3>BIOS OPTIMIZER</h3>
+      <p>Übersichtliche BIOS-Optimierungen für ein sinnvoll abgestimmtes Gaming-System.</p>
+      <strong class="price">15 €</strong>
+      <button class="add" data-name="BIOS OPTIMIZER" data-price="15">In den Warenkorb</button>
+    </article>
+  </div>
+</section>
+
+<section class="banner">
+  <div><small>CHUG TUNES PERFORMANCE</small><h2>BUILD. TUNE. <em>PERFORM.</em></h2></div>
+  <p>Mehr aus deinem Setup holen – mit klaren, verständlichen Optimierungen.</p>
+</section>
+
+<section class="section faq" id="faq">
+  <small>FAQ</small><h2>Fragen?</h2>
+  <details><summary>Wie kaufe ich ein Produkt?</summary><p>Produkt in den Warenkorb legen. Der echte Zahlungsanbieter wird später ergänzt.</p></details>
+  <details><summary>Kann ich mehrere Produkte kaufen?</summary><p>Ja. Du kannst beliebig mehrere Produkte in den Warenkorb legen.</p></details>
+  <details><summary>Kommt PayPal noch?</summary><p>Ja. Der Checkout ist vorbereitet und kann später mit PayPal und weiteren Zahlungsmethoden verbunden werden.</p></details>
+</section>
+</main>
+
+<footer><b>CHUG TUNES PERFORMANCE</b><span>© 2026 · Gaming Performance Store</span></footer>
+
+<div class="overlay" id="overlay"></div>
+<aside class="cart" id="cart">
+  <div class="cart-top"><h2>Warenkorb</h2><button id="closeCart">×</button></div>
+  <div id="items" class="items"><p class="empty">Dein Warenkorb ist leer.</p></div>
+  <div class="cart-bottom"><div><span>Gesamt</span><b id="total">0 €</b></div><button id="checkout" disabled>Zur Kasse</button></div>
+</aside>
+<script src="script.js"></script>
+</body>
+</html>
