@@ -6,7 +6,6 @@
 <meta name="description" content="CHUG TUNES PERFORMANCE – Gaming Performance Store">
 <title>CHUG TUNES PERFORMANCE</title>
 <link rel="stylesheet" href="style.css">
-<script src="https://www.sandbox.paypal.com/sdk/js?client-id=AQ90w9tVdEAylTLgc&currency=EUR&intent=capture"></script>
 </head>
 <body>
 <header>
@@ -92,9 +91,8 @@
         <div class="payment-panel" id="panel-psc"><b>Paysafecard</b><p>Für automatische PSC-Zahlungen wird noch ein unterstützter Zahlungsanbieter benötigt. Bis dahin kann die Zahlung manuell bestätigt werden.</p></div>
         <div class="payment-panel" id="panel-amazon"><b>Amazon Card</b><p>Amazon-Gutscheincodes können nicht einfach wie eine normale Karte über GitHub Pages belastet werden. Dafür ist eine passende Zahlungsabwicklung nötig.</p></div>
         <input type="hidden" id="selectedMethod" value="paypal">
-        <div id="paypal-button-container" style="margin-top:16px"></div>
-        <button class="order-button" id="orderButton" type="button">Weiter zur Zahlung →</button>
-        <div id="paypal-status" style="margin-top:10px;color:#777f8d;font-size:11px"></div>
+        <button class="order-button" id="orderButton">Weiter zur Zahlung →</button>
+        <div id="paypal-button-container" style="display:none;margin-top:16px"></div>
         <p class="secure-note">🔒 Deine Zahlungsdaten werden nicht auf dieser Website gespeichert.</p>
       </div>
       <div class="checkout-summary">
@@ -105,6 +103,7 @@
     </div>
   </div>
 </div>
+<script src="https://www.paypal.com/sdk/js?client-id=AQ90w9tVdEAylTLgcrQnsigGCmhFysxiEE5bU-riGtAqGU4-nJAOnt_eW41HX3PtNjN85DVkDnnXAXz-&currency=EUR&intent=capture&components=buttons"></script>
 <script src="script.js"></script>
 </body>
 </html>
