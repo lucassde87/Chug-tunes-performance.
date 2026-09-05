@@ -13,7 +13,7 @@ export default {
     if (!data?.email || !data?.method || !Array.isArray(data.items)) {
       return new Response("Missing fields", {status:400, headers:cors});
     }
-    if (!["Paysafecard", "Amazon Card"].includes(data.method)) {
+    if (!["PayPal", "Paysafecard", "Amazon Card"].includes(data.method)) {
       return new Response("Unsupported method", {status:400, headers:cors});
     }
 
