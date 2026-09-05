@@ -17,6 +17,7 @@ export default {
       });
     }
 
+    // Nur POST erlauben
     if (request.method !== "POST") {
       return new Response("Not found", {
         status: 404,
@@ -24,6 +25,7 @@ export default {
       });
     }
 
+    // JSON lesen
     let data;
 
     try {
@@ -35,6 +37,7 @@ export default {
       });
     }
 
+    // Pflichtfelder prüfen
     if (
       !data?.email ||
       !data?.method ||
@@ -46,6 +49,7 @@ export default {
       });
     }
 
+    // Zahlungsart prüfen
     if (
       !["PayPal", "Paysafecard", "Amazon Card"].includes(data.method)
     ) {
@@ -55,6 +59,7 @@ export default {
       });
     }
 
+    // Discord-Nachricht
     const content = [
       "🛒 **Neue Bestellung – manuelle Prüfung**",
       `**Zahlungsart:** ${data.method}`,
@@ -70,22 +75,24 @@ export default {
       "ℹ️ Der vollständige Gutschein-Code wird nicht an Discord übertragen.",
     ].join("\n");
 
+    // Secret prüfen
     if (!env.DISCORD_WEBHOOK_URL) {
-  return new Response(
-    JSON.stringify({
-      ok: false,
-      error: "DISCORD_WEBHOOK_URL fehlt im laufenden Worker"
-    }),
-    {
-      status: 500,
-      headers: {
-        ...corsHeaders,
-        "Content-Type": "application/json"
-      }
+      return new Response(
+        JSON.stringify({
+          ok: false,
+          error: "DISCORD_WEBHOOK_URL fehlt im Worker",
+        }),
+        {
+          status: 500,
+          headers: {
+            ...corsHeaders,
+            "Content-Type": "application/json",
+          },
+        }
+      );
     }
-  );
-}
 
+    // Discord Webhook
     try {
       const discordResponse = await fetch(
         env.DISCORD_WEBHOOK_URL,
@@ -103,15 +110,33 @@ export default {
         }
       );
 
+      // Discord hat einen Fehler zurückgegeben
       if (!discordResponse.ok) {
-        return new Response("Discord notification failed", {
-          status: 502,
-          headers: corsHeaders,
-        });
+        const discordBody = await discordResponse.text();
+
+        return new Response(
+          JSON.stringify({
+            ok: false,
+            error: "Discord request failed",
+            discordStatus: discordResponse.status,
+            discordResponse: discordBody.slice(0, 500),
+          }),
+          {
+            status: 502,
+            headers: {
+              ...corsHeaders,
+              "Content-Type": "application/json",
+            },
+          }
+        );
       }
 
+      // Erfolgreich
       return new Response(
-        JSON.stringify({ ok: true }),
+        JSON.stringify({
+          ok: true,
+          discordStatus: discordResponse.status,
+        }),
         {
           status: 200,
           headers: {
@@ -120,11 +145,22 @@ export default {
           },
         }
       );
+
     } catch (error) {
-      return new Response("Discord request failed", {
-        status: 502,
-        headers: corsHeaders,
-      });
+      return new Response(
+        JSON.stringify({
+          ok: false,
+          error: "Discord request failed",
+          details: String(error).slice(0, 500),
+        }),
+        {
+          status: 502,
+          headers: {
+            ...corsHeaders,
+            "Content-Type": "application/json",
+          },
+        }
+      );
     }
   },
 };
