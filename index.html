@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-  <!-- PayPal SDK: replace AQ90w9tVdEAylTLgc with your PayPal REST Client ID -->
-<script src="https://www.paypal.com/sdk/js?client-id=AQ90w9tVdEAylTLgc&currency=EUR&intent=capture"></script>
 <meta name="description" content="CHUG TUNES PERFORMANCE – Gaming Performance Store">
 <title>CHUG TUNES PERFORMANCE</title>
 <link rel="stylesheet" href="style.css">
+<script src="https://www.sandbox.paypal.com/sdk/js?client-id=AQ90w9tVdEAylTLgc&currency=EUR&intent=capture"></script>
 </head>
 <body>
 <header>
@@ -93,8 +92,9 @@
         <div class="payment-panel" id="panel-psc"><b>Paysafecard</b><p>Für automatische PSC-Zahlungen wird noch ein unterstützter Zahlungsanbieter benötigt. Bis dahin kann die Zahlung manuell bestätigt werden.</p></div>
         <div class="payment-panel" id="panel-amazon"><b>Amazon Card</b><p>Amazon-Gutscheincodes können nicht einfach wie eine normale Karte über GitHub Pages belastet werden. Dafür ist eine passende Zahlungsabwicklung nötig.</p></div>
         <input type="hidden" id="selectedMethod" value="paypal">
-        <button class="order-button" id="orderButton">Weiter zur Zahlung →</button>
-        <div id="paypal-button-container" class="paypal-button-container" hidden></div>
+        <div id="paypal-button-container" style="margin-top:16px"></div>
+        <button class="order-button" id="orderButton" type="button">Weiter zur Zahlung →</button>
+        <div id="paypal-status" style="margin-top:10px;color:#777f8d;font-size:11px"></div>
         <p class="secure-note">🔒 Deine Zahlungsdaten werden nicht auf dieser Website gespeichert.</p>
       </div>
       <div class="checkout-summary">
