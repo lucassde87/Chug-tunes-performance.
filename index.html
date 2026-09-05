@@ -189,8 +189,9 @@ async function handleGiftCardOrder(method){
   const fieldId=method==='Paysafecard'?'pscCode':'amazonCode';
   const code=$("#"+fieldId).value.trim();
   if(!code){ alert('Bitte gib deinen '+method+'-Code ein.'); return; }
-  if(method==='Paysafecard' && !/^\d{16}$/.test(code)){
-    alert('Bitte gib einen gültigen 16-stelligen Paysafecard-Code ein.'); return;
+  const normalizedCode = method==='Paysafecard' ? code.replace(/[\s-]/g,'') : code;
+  if(method==='Paysafecard' && !/^\d{16}$/.test(normalizedCode)){
+    alert('Bitte gib genau 16 Ziffern ein (Testcode reicht zum Testen).'); return;
   }
   // Aus Sicherheitsgründen wird der vollständige Gutschein-Code NICHT an Discord gesendet.
   // Das Backend erhält nur die Bestellung und kann die Zahlung manuell/offiziell prüfen.
