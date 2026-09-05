@@ -33,7 +33,7 @@ function closeCheckout(){
   $("#orderButton").style.display="";
 }
 
-const ORDER_API_URL = "https://chug-tunes-performance.damonbond29.workers.dev";
+const ORDER_API_URL = "https://chug-tunes-order-api.damonbond29.workers.dev";
 const DISCORD_SERVER_URL = "https://discord.gg/DEIN-SERVER";
 
 async function notifyDiscord(method){
