@@ -159,7 +159,7 @@ function closeCheckout(){
 }
 
 const ORDER_API_URL = "https://chug-tunes-performance.damonbond29.workers.dev";
-const DISCORD_SERVER_URL = "https://discord.gg/DEIN-SERVER";
+const DISCORD_SERVER_URL = "https://discord.gg/n49xKpZsm";
 
 async function notifyDiscord(method){
   const email = $("#customerEmail").value.trim();
@@ -179,9 +179,9 @@ async function notifyDiscord(method){
     price: p.price
   }));
 
-  const total = cart.reduce((s,p) => s + p.price, 0);
-
+  const total = cart.reduce((s, p) => s + p.price, 0);
   const status = $("#orderStatus");
+
   status.textContent = "Bestellung wird übermittelt…";
 
   try {
@@ -206,9 +206,13 @@ async function notifyDiscord(method){
       throw new Error("HTTP " + res.status);
     }
 
-    status.textContent = "Bestellung wurde erfolgreich übermittelt.";
+    status.textContent =
+      "Bestellung wurde erfolgreich übermittelt. Bitte öffne jetzt Discord.";
 
-    if(DISCORD_SERVER_URL && !DISCORD_SERVER_URL.includes("DEIN-SERVER")){
+    if(
+      DISCORD_SERVER_URL &&
+      !DISCORD_SERVER_URL.includes("DEIN-SERVER")
+    ){
       window.open(DISCORD_SERVER_URL, "_blank", "noopener");
     }
 
