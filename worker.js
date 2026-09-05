@@ -9,7 +9,6 @@ export default {
       "Access-Control-Max-Age": "86400",
     };
 
-    // CORS Preflight
     if (request.method === "OPTIONS") {
       return new Response(null, {
         status: 204,
@@ -17,7 +16,6 @@ export default {
       });
     }
 
-    // Nur POST erlauben
     if (request.method !== "POST") {
       return new Response("Not found", {
         status: 404,
@@ -25,7 +23,6 @@ export default {
       });
     }
 
-    // JSON lesen
     let data;
 
     try {
@@ -37,7 +34,6 @@ export default {
       });
     }
 
-    // Pflichtfelder prüfen
     if (
       !data?.email ||
       !data?.method ||
@@ -49,7 +45,6 @@ export default {
       });
     }
 
-    // Zahlungsart prüfen
     if (
       !["PayPal", "Paysafecard", "Amazon Card"].includes(data.method)
     ) {
@@ -59,10 +54,9 @@ export default {
       });
     }
 
-    // Discord-Nachricht
     const content = [
       "🛒 **Neue Bestellung – manuelle Prüfung**",
-      `**Zahlungsart:** ${data.method}`,
+      `**Zahlungsart:** ${String(data.method).slice(0, 50)}`,
       `**E-Mail:** ${String(data.email).slice(0, 160)}`,
       `**Produkte:** ${data.items
         .map(
@@ -75,8 +69,15 @@ export default {
       "ℹ️ Der vollständige Gutschein-Code wird nicht an Discord übertragen.",
     ].join("\n");
 
-    // Secret prüfen
-    if (!env.DISCORD_WEBHOOK_URL) {
+    /*
+      Webhook-Secret bereinigen:
+      Entfernt unsichtbare Steuerzeichen und Leerzeichen.
+    */
+    const webhookUrl = String(env.DISCORD_WEBHOOK_URL || "")
+      .replace(/[\u0000-\u001F\u007F]/g, "")
+      .trim();
+
+    if (!webhookUrl) {
       return new Response(
         JSON.stringify({
           ok: false,
@@ -92,25 +93,41 @@ export default {
       );
     }
 
-    // Discord Webhook
+    /*
+      URL prüfen, ohne die URL an den Browser zurückzugeben.
+    */
     try {
-      const discordResponse = await fetch(
-        env.DISCORD_WEBHOOK_URL,
+      new URL(webhookUrl);
+    } catch {
+      return new Response(
+        JSON.stringify({
+          ok: false,
+          error: "DISCORD_WEBHOOK_URL ist keine gültige URL",
+        }),
         {
-          method: "POST",
+          status: 500,
           headers: {
+            ...corsHeaders,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            content,
-            allowed_mentions: {
-              parse: [],
-            },
-          }),
         }
       );
+    }
 
-      // Discord hat einen Fehler zurückgegeben
+    try {
+      const discordResponse = await fetch(webhookUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content,
+          allowed_mentions: {
+            parse: [],
+          },
+        }),
+      });
+
       if (!discordResponse.ok) {
         const discordBody = await discordResponse.text();
 
@@ -131,7 +148,6 @@ export default {
         );
       }
 
-      // Erfolgreich
       return new Response(
         JSON.stringify({
           ok: true,
