@@ -5,7 +5,15 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="CHUG TUNES PERFORMANCE – Gaming Performance Store">
 <title>CHUG TUNES PERFORMANCE</title>
-<link rel="stylesheet" href="style.css">
+
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#07080b;color:#f5f6f8;font-family:Arial,Helvetica,sans-serif}a{text-decoration:none;color:inherit}header{height:74px;padding:0 7%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #22252d;background:#08090cdd;backdrop-filter:blur(15px);position:sticky;top:0;z-index:10}.logo{font-weight:900;letter-spacing:.7px}.logo span{display:inline-grid;place-items:center;background:#fff;color:#08090c;border-radius:9px;width:35px;height:35px;margin-right:7px;font-size:11px}.logo b{color:#707784}nav{display:flex;gap:35px;color:#969ca8;font-size:14px}nav a:hover{color:#fff}.cart-btn{border:1px solid #30343d;background:#111319;color:#fff;padding:10px 14px;border-radius:11px;cursor:pointer}.cart-btn i{font-style:normal;background:#fff;color:#000;border-radius:20px;padding:2px 6px;font-size:11px}.hero{min-height:610px;padding:95px 9%;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:60px;background:radial-gradient(circle at 78% 45%,#262c37,#0b0c10 40%,#07080b 72%)}small{font-size:11px;letter-spacing:3px;color:#858c99;font-weight:800}.hero h1{font-size:clamp(52px,7vw,88px);line-height:.9;margin:18px 0}.hero h1 em,.banner em{font-style:normal;color:#777f8d}.hero p{color:#979da8;line-height:1.7;font-size:17px;max-width:560px}.button{display:inline-block;margin-top:22px;background:#fff;color:#08090c;padding:15px 20px;border-radius:11px;font-weight:800}.hero-box{height:330px;border:1px solid #2b3039;border-radius:25px;background:linear-gradient(145deg,#191c23,#0b0d11);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;color:#7f8794;letter-spacing:3px;text-align:center;overflow:hidden;position:relative}.hero-box:before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,#fff,#5f6774 15%,transparent 65%);opacity:.35;filter:blur(8px)}.glow{position:relative;font-size:70px;font-weight:900;color:#fff}.hero-box strong{position:relative;font-size:12px}.section{padding:90px 9%}.heading{display:flex;justify-content:space-between;align-items:end;margin-bottom:35px}.heading h2,.faq h2{font-size:44px;margin:8px 0}.heading p{color:#7e8591}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.card{background:#101218;border:1px solid #292e37;border-radius:20px;padding:30px;transition:.2s}.card:hover{transform:translateY(-4px);border-color:#505763}.featured{background:linear-gradient(145deg,#191c23,#0e1015)}.icon{font-size:31px;margin-bottom:25px}.card label{font-size:10px;letter-spacing:2px;color:#858d9a}.card h3{font-size:28px;margin:13px 0}.card p{color:#858c98;line-height:1.6;min-height:80px}.price{font-size:30px;display:block;margin:25px 0}.add,#checkout{width:100%;padding:14px;border:0;border-radius:10px;background:#fff;color:#08090c;font-weight:800;cursor:pointer}.banner{padding:70px 9%;background:#101218;border-top:1px solid #242832;border-bottom:1px solid #242832;display:flex;justify-content:space-between;align-items:center;gap:40px}.banner h2{font-size:40px;margin:10px 0}.banner p{color:#858c98;max-width:450px;line-height:1.6}.faq{max-width:1000px;margin:auto}.faq details{border-bottom:1px solid #292e37;padding:20px 0}.faq summary{font-weight:700;cursor:pointer}.faq details p{color:#858c98;line-height:1.6}footer{border-top:1px solid #22252d;padding:28px 9%;display:flex;justify-content:space-between;color:#737a87;font-size:12px}.overlay{display:none;position:fixed;inset:0;background:#000b;z-index:19}.overlay.open{display:block}.cart{position:fixed;right:-440px;top:0;width:min(440px,100%);height:100%;background:#101218;border-left:1px solid #2b3038;z-index:20;padding:25px;display:flex;flex-direction:column;transition:.25s}.cart.open{right:0}.cart-top{display:flex;justify-content:space-between;align-items:center}.cart-top h2{margin:0}.cart-top button{background:none;border:0;color:#fff;font-size:30px;cursor:pointer}.items{flex:1;overflow:auto;margin-top:20px}.empty{text-align:center;color:#747b87;margin-top:80px}.item{border:1px solid #2b3038;border-radius:11px;padding:15px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}.item small{letter-spacing:0}.remove{border:0;background:none;color:#9299a5;cursor:pointer}.cart-bottom{border-top:1px solid #2b3038;padding-top:20px}.cart-bottom>div{display:flex;justify-content:space-between;font-size:18px;margin-bottom:15px}#checkout:disabled{opacity:.3;cursor:not-allowed}@media(max-width:800px){header{padding:0 5%}nav{display:none}.hero{grid-template-columns:1fr;padding:75px 7%;min-height:auto}.hero-box{height:230px}.section{padding:65px 7%}.heading{display:block}.heading p{margin-top:15px}.grid{grid-template-columns:1fr}.banner{padding:60px 7%;display:block}.banner h2,.faq h2{font-size:34px}footer{padding:25px 7%;flex-direction:column;gap:10px}.logo{font-size:13px}}body.modal-open{overflow:hidden}
+.checkout-modal{display:none;position:fixed;inset:0;background:#000c;z-index:50;padding:25px;overflow:auto;align-items:center;justify-content:center}.checkout-modal.open{display:flex}.checkout-box{width:min(900px,100%);background:#0e1015;border:1px solid #303540;border-radius:22px;box-shadow:0 30px 100px #000;overflow:hidden}.checkout-head{display:flex;justify-content:space-between;align-items:center;padding:24px 28px;border-bottom:1px solid #282d35}.checkout-head h2{margin:7px 0 0;font-size:32px}.checkout-head button{border:0;background:none;color:#fff;font-size:34px;cursor:pointer}.checkout-layout{display:grid;grid-template-columns:1.2fr .8fr;gap:0}.checkout-layout>div{padding:28px}.checkout-layout>div+div{border-left:1px solid #282d35;background:#0a0c10}.field-label{display:block;color:#aeb4bf;font-size:12px;font-weight:700;margin:0 0 8px}.checkout-input{width:100%;padding:14px 15px;border-radius:10px;border:1px solid #303540;background:#080a0e;color:#fff;outline:none;margin-bottom:20px}.checkout-input:focus{border-color:#707887}.payment-methods{display:grid;gap:9px}.payment-method{width:100%;display:grid;grid-template-columns:38px 1fr auto;align-items:center;text-align:left;gap:12px;padding:13px;border:1px solid #2d323b;border-radius:12px;background:#11141a;color:#fff;cursor:pointer}.payment-method:hover,.payment-method.selected{border-color:#8d95a3;background:#181b22}.payment-method b{display:block;font-size:14px}.payment-method small{display:block;letter-spacing:0;color:#777f8c;font-size:11px;margin-top:3px}.pay-icon{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;background:#fff;color:#08090c;font-weight:900}.payment-panel{display:none;margin-top:12px;padding:13px 15px;border:1px solid #292e37;border-radius:11px;background:#0b0d11;color:#9ba2ae;font-size:12px;line-height:1.55}.payment-panel.active{display:block}.payment-panel b{color:#fff}.payment-panel p{margin:6px 0 0}.order-button{width:100%;margin-top:16px;padding:15px;border:0;border-radius:11px;background:#fff;color:#08090c;font-weight:900;cursor:pointer}.secure-note{text-align:center;color:#707784;font-size:11px;margin:12px 0 0}.checkout-items{margin-top:18px}.checkout-items>div{display:flex;justify-content:space-between;gap:15px;padding:12px 0;border-bottom:1px solid #252a32;color:#b4bac4;font-size:13px}.checkout-items b{color:#fff}.summary-total{display:flex;justify-content:space-between;margin-top:22px;font-size:18px}.summary-total b{font-size:22px;color:#fff}
+@media(max-width:760px){.checkout-modal{padding:10px}.checkout-layout{grid-template-columns:1fr}.checkout-layout>div+div{border-left:0;border-top:1px solid #282d35}.checkout-layout>div{padding:20px}.checkout-head{padding:20px}.checkout-head h2{font-size:27px}}
+
+.payment-code{margin-top:12px;margin-bottom:10px}.payment-actions{display:flex;gap:8px;flex-wrap:wrap}.payment-actions button{border:1px solid #303540;border-radius:9px;padding:10px 12px;background:#151820;color:#fff;font-weight:700;cursor:pointer}.payment-actions button:hover{border-color:#7b8492}.discord-button{background:#fff!important;color:#08090c!important}.payment-panel.active .checkout-input{display:block}.payment-panel .checkout-input{box-sizing:border-box}.payment-panel{overflow:hidden}
+
+</style>
 </head>
 <body>
 <header>
@@ -113,6 +121,194 @@
   </div>
 </div>
 <script src="https://www.paypal.com/sdk/js?client-id=AQ90w9tVdEAylTLgcrQnsigGCmhFysxiEE5bU-riGtAqGU4-nJAOnt_eW41HX3PtNjN85DVkDnnXAXz-&currency=EUR&intent=capture&components=buttons"></script>
-<script src="script.js"></script>
+
+<script>
+const cart=[];
+const $=x=>document.querySelector(x);
+
+function render(){
+  const box=$("#items");
+  $("#count").textContent=cart.length;
+  const total=cart.reduce((s,p)=>s+p.price,0);
+  $("#total").textContent=total.toFixed(2).replace('.',',')+" €";
+  $("#checkout").disabled=!cart.length;
+  if(!cart.length){box.innerHTML='<p class="empty">Dein Warenkorb ist leer.</p>';return}
+  box.innerHTML=cart.map((p,i)=>`<div class="item"><div><b>${p.name}</b><br><small>${p.price.toFixed(2).replace('.',',')} €</small></div><button class="remove" onclick="remove(${i})">Entfernen</button></div>`).join("");
+}
+
+function remove(i){cart.splice(i,1);render()}
+function openCart(){$("#cart").classList.add("open");$("#overlay").classList.add("open")}
+function closeCart(){$("#cart").classList.remove("open");$("#overlay").classList.remove("open")}
+
+function openCheckout(){
+  if(!cart.length)return;
+  closeCart();
+  const total=cart.reduce((s,p)=>s+p.price,0);
+  $("#checkoutItems").innerHTML=cart.map(p=>`<div><span>${p.name}</span><b>${p.price.toFixed(2).replace('.',',')} €</b></div>`).join("");
+  $("#checkoutTotal").textContent=total.toFixed(2).replace('.',',')+" €";
+  $("#checkoutModal").classList.add("open");
+  document.body.classList.add("modal-open");
+}
+
+function closeCheckout(){
+  $("#checkoutModal").classList.remove("open");
+  document.body.classList.remove("modal-open");
+  const paypalBox=$("#paypal-button-container");
+  if(paypalBox) paypalBox.style.display="none";
+  $("#orderButton").style.display="";
+}
+
+const ORDER_API_URL = "https://chug-tunes-performance.damonbond29.workers.dev";
+const DISCORD_SERVER_URL = "https://discord.gg/DEIN-SERVER";
+
+async function notifyDiscord(method){
+  const email=$("#customerEmail").value.trim();
+  if(!email){ alert('Bitte gib deine E-Mail-Adresse ein.'); return false; }
+  const items=cart.map(p=>({name:p.name,price:p.price}));
+  const total=cart.reduce((s,p)=>s+p.price,0);
+  const status=$("#orderStatus");
+  status.textContent='Bestellung wird an den Shop gemeldet…';
+  try{
+    const res=await fetch(ORDER_API_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email,method,items,total})
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    status.textContent='Bestellung wurde übermittelt. Bitte öffne jetzt Discord für weitere Schritte.';
+    window.open(DISCORD_SERVER_URL,'_blank','noopener');
+    return true;
+  }catch(err){
+    console.error('Order notification error:',err);
+    status.textContent='Die Bestellung konnte gerade nicht übermittelt werden. Bitte versuche es später erneut.';
+    return false;
+  }
+}
+
+async function handleGiftCardOrder(method){
+  const fieldId=method==='Paysafecard'?'pscCode':'amazonCode';
+  const code=$("#"+fieldId).value.trim();
+  if(!code){ alert('Bitte gib deinen '+method+'-Code ein.'); return; }
+  if(method==='Paysafecard' && !/^\d{16}$/.test(code)){
+    alert('Bitte gib einen gültigen 16-stelligen Paysafecard-Code ein.'); return;
+  }
+  // Aus Sicherheitsgründen wird der vollständige Gutschein-Code NICHT an Discord gesendet.
+  // Das Backend erhält nur die Bestellung und kann die Zahlung manuell/offiziell prüfen.
+  const ok=await notifyDiscord(method);
+  if(ok){
+    $("#"+(fieldId)).value='';
+  }
+}
+
+function selectMethod(method){
+  const normalized = method === "psc" ? "psc" : method === "amazon" ? "amazon" : "paypal";
+  document.querySelectorAll(".payment-method").forEach(btn=>{
+    btn.classList.toggle("selected", btn.dataset.method === normalized);
+  });
+  document.querySelectorAll(".payment-panel").forEach(panel=>{
+    panel.classList.toggle("active", panel.id === "panel-" + normalized);
+  });
+  $("#selectedMethod").value = normalized;
+
+  const paypalBox = $("#paypal-button-container");
+  if(paypalBox) {
+    paypalBox.style.display = "none";
+    paypalBox.innerHTML = "";
+  }
+  $("#orderButton").style.display = "";
+  $("#orderStatus").textContent = "";
+}
+
+function startPayPal(){
+  const email=$("#customerEmail").value.trim();
+  if(!email){
+    alert('Bitte gib deine E-Mail-Adresse ein.');
+    return;
+  }
+
+  if(typeof paypal === "undefined"){
+    alert('PayPal konnte nicht geladen werden. Bitte lade die Seite neu.');
+    return;
+  }
+
+  const total=cart.reduce((s,p)=>s+p.price,0).toFixed(2);
+  const container=$("#paypal-button-container");
+  const orderButton=$("#orderButton");
+
+  orderButton.style.display="none";
+  container.style.display="block";
+  container.innerHTML="";
+
+  paypal.Buttons({
+    style:{
+      layout:"vertical",
+      shape:"rect",
+      label:"paypal"
+    },
+    createOrder:function(data,actions){
+      return actions.order.create({
+        purchase_units:[{
+          description:"CHUG TUNES PERFORMANCE",
+          amount:{
+            currency_code:"EUR",
+            value:total
+          }
+        }]
+      });
+    },
+    onApprove:function(data,actions){
+      return actions.order.capture().then(function(details){
+        alert("Zahlung erfolgreich! Vielen Dank für deine Bestellung.");
+        cart.length=0;
+        render();
+        closeCheckout();
+      });
+    },
+    onCancel:function(){
+      container.style.display="none";
+      orderButton.style.display="";
+    },
+    onError:function(err){
+      console.error("PayPal error:",err);
+      alert("PayPal-Zahlung konnte nicht gestartet werden. Bitte versuche es erneut.");
+      container.style.display="none";
+      orderButton.style.display="";
+    }
+  }).render("#paypal-button-container");
+}
+
+document.querySelectorAll(".add").forEach(b=>b.onclick=()=>{
+  cart.push({name:b.dataset.name,price:+b.dataset.price});
+  render();
+  openCart();
+});
+
+$("#openCart").onclick=openCart;
+$("#closeCart").onclick=closeCart;
+$("#overlay").onclick=closeCart;
+$("#checkout").onclick=openCheckout;
+$("#closeCheckout").onclick=closeCheckout;
+$("#checkoutModal").addEventListener('click',e=>{
+  if(e.target.id==='checkoutModal')closeCheckout();
+});
+document.querySelectorAll('.payment-method').forEach(b=>{
+  b.addEventListener('click',()=>selectMethod(b.dataset.method));
+});
+$("#orderButton").onclick=()=>{
+  const method=$("#selectedMethod").value;
+  if(method==='paypal'){
+    startPayPal();
+  }else if(method==='psc'){
+    handleGiftCardOrder('Paysafecard');
+  }else{
+    handleGiftCardOrder('Amazon Card');
+  }
+};
+
+
+selectMethod('paypal');
+render();
+
+</script>
 </body>
 </html>
