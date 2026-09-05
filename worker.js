@@ -71,11 +71,20 @@ export default {
     ].join("\n");
 
     if (!env.DISCORD_WEBHOOK_URL) {
-      return new Response("Discord webhook not configured", {
-        status: 500,
-        headers: corsHeaders,
-      });
+  return new Response(
+    JSON.stringify({
+      ok: false,
+      error: "DISCORD_WEBHOOK_URL fehlt im laufenden Worker"
+    }),
+    {
+      status: 500,
+      headers: {
+        ...corsHeaders,
+        "Content-Type": "application/json"
+      }
     }
+  );
+}
 
     try {
       const discordResponse = await fetch(
