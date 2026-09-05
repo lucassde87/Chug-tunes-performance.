@@ -162,25 +162,64 @@ const ORDER_API_URL = "https://chug-tunes-performance.damonbond29.workers.dev";
 const DISCORD_SERVER_URL = "https://discord.gg/DEIN-SERVER";
 
 async function notifyDiscord(method){
-  const email=$("#customerEmail").value.trim();
-  if(!email){ alert('Bitte gib deine E-Mail-Adresse ein.'); return false; }
-  const items=cart.map(p=>({name:p.name,price:p.price}));
-  const total=cart.reduce((s,p)=>s+p.price,0);
-  const status=$("#orderStatus");
-  status.textContent='Bestellung wird an den Shop gemeldet…';
-  try{
-    const res=await fetch(ORDER_API_URL,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({email,method,items,total})
+  const email = $("#customerEmail").value.trim();
+
+  if(!email){
+    alert("Bitte gib deine E-Mail-Adresse ein.");
+    return false;
+  }
+
+  if(!cart.length){
+    alert("Dein Warenkorb ist leer.");
+    return false;
+  }
+
+  const items = cart.map(p => ({
+    name: p.name,
+    price: p.price
+  }));
+
+  const total = cart.reduce((s,p) => s + p.price, 0);
+
+  const status = $("#orderStatus");
+  status.textContent = "Bestellung wird übermittelt…";
+
+  try {
+    const res = await fetch(ORDER_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        type: "order",
+        email: email,
+        method: method,
+        items: items,
+        total: total
+      })
     });
-    if(!res.ok) throw new Error('HTTP '+res.status);
-    status.textContent='Bestellung wurde übermittelt. Bitte öffne jetzt Discord für weitere Schritte.';
-    window.open(DISCORD_SERVER_URL,'_blank','noopener');
+
+    const text = await res.text();
+
+    if(!res.ok){
+      console.error("Worker antwortet:", res.status, text);
+      throw new Error("HTTP " + res.status);
+    }
+
+    status.textContent = "Bestellung wurde erfolgreich übermittelt.";
+
+    if(DISCORD_SERVER_URL && !DISCORD_SERVER_URL.includes("DEIN-SERVER")){
+      window.open(DISCORD_SERVER_URL, "_blank", "noopener");
+    }
+
     return true;
-  }catch(err){
-    console.error('Order notification error:',err);
-    status.textContent='Die Bestellung konnte gerade nicht übermittelt werden. Bitte versuche es später erneut.';
+
+  } catch(err) {
+    console.error("Bestellfehler:", err);
+
+    status.textContent =
+      "Die Bestellung konnte gerade nicht übermittelt werden. Bitte versuche es später erneut.";
+
     return false;
   }
 }
