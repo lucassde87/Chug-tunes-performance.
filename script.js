@@ -75,6 +75,25 @@ async function handleGiftCardOrder(method){
   }
 }
 
+function selectMethod(method){
+  const normalized = method === "psc" ? "psc" : method === "amazon" ? "amazon" : "paypal";
+  document.querySelectorAll(".payment-method").forEach(btn=>{
+    btn.classList.toggle("selected", btn.dataset.method === normalized);
+  });
+  document.querySelectorAll(".payment-panel").forEach(panel=>{
+    panel.classList.toggle("active", panel.id === "panel-" + normalized);
+  });
+  $("#selectedMethod").value = normalized;
+
+  const paypalBox = $("#paypal-button-container");
+  if(paypalBox) {
+    paypalBox.style.display = "none";
+    paypalBox.innerHTML = "";
+  }
+  $("#orderButton").style.display = "";
+  $("#orderStatus").textContent = "";
+}
+
 function startPayPal(){
   const email=$("#customerEmail").value.trim();
   if(!email){
