@@ -56,9 +56,9 @@
 
 <section class="section faq" id="faq">
   <small>FAQ</small><h2>Fragen?</h2>
-  <details><summary>Wie kaufe ich ein Produkt?</summary><p>Produkt in den Warenkorb legen. Der echte Zahlungsanbieter wird später ergänzt.</p></details>
+  <details><summary>Wie kaufe ich ein Produkt?</summary><p>Produkt in den Warenkorb legen. Nach dem Warenkorb kannst du deine gewünschte Zahlungsart auswählen.</p></details>
   <details><summary>Kann ich mehrere Produkte kaufen?</summary><p>Ja. Du kannst beliebig mehrere Produkte in den Warenkorb legen.</p></details>
-  <details><summary>Kommt PayPal noch?</summary><p>Ja. Der Checkout ist vorbereitet und kann später mit PayPal und weiteren Zahlungsmethoden verbunden werden.</p></details>
+  <details><summary>Kommt PayPal noch?</summary><p>Ja. Im Checkout stehen PayPal, Paysafecard und Amazon Card als Zahlungsarten bereit.</p></details>
 </section>
 </main>
 
@@ -70,6 +70,38 @@
   <div id="items" class="items"><p class="empty">Dein Warenkorb ist leer.</p></div>
   <div class="cart-bottom"><div><span>Gesamt</span><b id="total">0 €</b></div><button id="checkout" disabled>Zur Kasse</button></div>
 </aside>
+
+<div class="checkout-modal" id="checkoutModal">
+  <div class="checkout-box">
+    <div class="checkout-head">
+      <div><small>CHECKOUT</small><h2>Zur Kasse</h2></div>
+      <button id="closeCheckout" aria-label="Checkout schließen">×</button>
+    </div>
+    <div class="checkout-layout">
+      <div>
+        <label class="field-label">E-Mail-Adresse</label>
+        <input id="customerEmail" class="checkout-input" type="email" placeholder="deine@email.de" autocomplete="email">
+        <label class="field-label">Zahlungsmethode</label>
+        <div class="payment-methods">
+          <button class="payment-method selected" data-method="paypal"><span class="pay-icon">P</span><span><b>PayPal</b><small>Schnell & sicher</small></span><span>›</span></button>
+          <button class="payment-method" data-method="psc"><span class="pay-icon">₱</span><span><b>Paysafecard</b><small>PSC</small></span><span>›</span></button>
+          <button class="payment-method" data-method="amazon"><span class="pay-icon">A</span><span><b>Amazon Card</b><small>Gutschein</small></span><span>›</span></button>
+        </div>
+        <div class="payment-panel active" id="panel-paypal"><b>PayPal</b><p>Du wirst beim echten Checkout zu PayPal weitergeleitet. Die Live-Zahlung wird nach dem Eintragen deiner PayPal-Zugangsdaten aktiviert.</p></div>
+        <div class="payment-panel" id="panel-psc"><b>Paysafecard</b><p>Für automatische PSC-Zahlungen wird noch ein unterstützter Zahlungsanbieter benötigt. Bis dahin kann die Zahlung manuell bestätigt werden.</p></div>
+        <div class="payment-panel" id="panel-amazon"><b>Amazon Card</b><p>Amazon-Gutscheincodes können nicht einfach wie eine normale Karte über GitHub Pages belastet werden. Dafür ist eine passende Zahlungsabwicklung nötig.</p></div>
+        <input type="hidden" id="selectedMethod" value="paypal">
+        <button class="order-button" id="orderButton">Weiter zur Zahlung →</button>
+        <p class="secure-note">🔒 Deine Zahlungsdaten werden nicht auf dieser Website gespeichert.</p>
+      </div>
+      <div class="checkout-summary">
+        <small>BESTELLUNG</small>
+        <div id="checkoutItems" class="checkout-items"></div>
+        <div class="summary-total"><span>Gesamt</span><b id="checkoutTotal">0,00 €</b></div>
+      </div>
+    </div>
+  </div>
+</div>
 <script src="script.js"></script>
 </body>
 </html>
