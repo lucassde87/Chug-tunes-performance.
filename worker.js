@@ -1,10 +1,10 @@
 export default {
   async fetch(request, env) {
     const cors = {
-      "Access-Control-Allow-Origin": env.ALLOWED_ORIGIN || "*",
-      "Access-Control-Allow-Headers": "Content-Type",
-      "Access-Control-Allow-Methods": "POST, OPTIONS"
-    };
+  "Access-Control-Allow-Origin": "https://lucassde87.github.io",
+  "Access-Control-Allow-Headers": "Content-Type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+};
     if (request.method === "OPTIONS") return new Response(null, {headers: cors});
     if (request.method !== "POST") return new Response("Not found", {status:404, headers:cors});
 
