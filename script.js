@@ -33,18 +33,46 @@ function closeCheckout(){
   $("#orderButton").style.display="";
 }
 
-function selectMethod(method){
-  document.querySelectorAll('.payment-method').forEach(x=>x.classList.remove('selected'));
-  const el=document.querySelector(`[data-method="${method}"]`);
-  if(el) el.classList.add('selected');
-  document.querySelectorAll('.payment-panel').forEach(x=>x.classList.remove('active'));
-  const panel=$("#panel-"+method);
-  if(panel) panel.classList.add('active');
-  $("#selectedMethod").value=method;
+const ORDER_API_URL = "https://DEIN-BACKEND.example.com/order";
+const DISCORD_SERVER_URL = "https://discord.gg/DEIN-SERVER";
 
-  const paypalBox=$("#paypal-button-container");
-  if(paypalBox) paypalBox.style.display="none";
-  $("#orderButton").style.display="";
+async function notifyDiscord(method){
+  const email=$("#customerEmail").value.trim();
+  if(!email){ alert('Bitte gib deine E-Mail-Adresse ein.'); return false; }
+  const items=cart.map(p=>({name:p.name,price:p.price}));
+  const total=cart.reduce((s,p)=>s+p.price,0);
+  const status=$("#orderStatus");
+  status.textContent='Bestellung wird an den Shop gemeldet…';
+  try{
+    const res=await fetch(ORDER_API_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email,method,items,total})
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    status.textContent='Bestellung wurde übermittelt. Bitte öffne jetzt Discord für weitere Schritte.';
+    window.open(DISCORD_SERVER_URL,'_blank','noopener');
+    return true;
+  }catch(err){
+    console.error('Order notification error:',err);
+    status.textContent='Die Bestellung konnte gerade nicht übermittelt werden. Bitte versuche es später erneut.';
+    return false;
+  }
+}
+
+async function handleGiftCardOrder(method){
+  const fieldId=method==='Paysafecard'?'pscCode':'amazonCode';
+  const code=$("#"+fieldId).value.trim();
+  if(!code){ alert('Bitte gib deinen '+method+'-Code ein.'); return; }
+  if(method==='Paysafecard' && !/^\d{16}$/.test(code)){
+    alert('Bitte gib einen gültigen 16-stelligen Paysafecard-Code ein.'); return;
+  }
+  // Aus Sicherheitsgründen wird der vollständige Gutschein-Code NICHT an Discord gesendet.
+  // Das Backend erhält nur die Bestellung und kann die Zahlung manuell/offiziell prüfen.
+  const ok=await notifyDiscord(method);
+  if(ok){
+    $("#"+(fieldId)).value='';
+  }
 }
 
 function startPayPal(){
@@ -122,7 +150,17 @@ $("#checkoutModal").addEventListener('click',e=>{
 document.querySelectorAll('.payment-method').forEach(b=>{
   b.addEventListener('click',()=>selectMethod(b.dataset.method));
 });
-$("#orderButton").onclick=startPayPal;
+$("#orderButton").onclick=()=>{
+  const method=$("#selectedMethod").value;
+  if(method==='paypal'){
+    startPayPal();
+  }else if(method==='psc'){
+    handleGiftCardOrder('Paysafecard');
+  }else{
+    handleGiftCardOrder('Amazon Card');
+  }
+};
+
 
 selectMethod('paypal');
 render();

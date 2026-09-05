@@ -88,12 +88,21 @@
           <button class="payment-method" data-method="amazon"><span class="pay-icon">A</span><span><b>Amazon Card</b><small>Gutschein</small></span><span>›</span></button>
         </div>
         <div class="payment-panel active" id="panel-paypal"><b>PayPal</b><p>Du wirst beim echten Checkout zu PayPal weitergeleitet. Die Live-Zahlung wird nach dem Eintragen deiner PayPal-Zugangsdaten aktiviert.</p></div>
-        <div class="payment-panel" id="panel-psc"><b>Paysafecard</b><p>Für automatische PSC-Zahlungen wird noch ein unterstützter Zahlungsanbieter benötigt. Bis dahin kann die Zahlung manuell bestätigt werden.</p></div>
-        <div class="payment-panel" id="panel-amazon"><b>Amazon Card</b><p>Amazon-Gutscheincodes können nicht einfach wie eine normale Karte über GitHub Pages belastet werden. Dafür ist eine passende Zahlungsabwicklung nötig.</p></div>
+        <div class="payment-panel" id="panel-psc">
+          <b>Paysafecard</b>
+          <p>Gib deinen PSC-Code ein. Der Code wird nicht von dieser Website an Discord gesendet. Danach kannst du direkt zum Discord-Server gehen und ihn dort in einem privaten Ticket übermitteln.</p>
+          <input id="pscCode" class="checkout-input payment-code" type="password" inputmode="numeric" maxlength="19" placeholder="16-stelliger PSC-Code" autocomplete="off">
+        </div>
+        <div class="payment-panel" id="panel-amazon">
+          <b>Amazon Card</b>
+          <p>Gib deinen Amazon-Gutscheincode ein. Der Code wird nicht von dieser Website an Discord gesendet. Danach kannst du direkt zum Discord-Server gehen und ihn dort in einem privaten Ticket übermitteln.</p>
+          <input id="amazonCode" class="checkout-input payment-code" type="password" maxlength="80" placeholder="Amazon-Gutscheincode" autocomplete="off">
+        </div>
         <input type="hidden" id="selectedMethod" value="paypal">
         <button class="order-button" id="orderButton">Weiter zur Zahlung →</button>
+        <div id="orderStatus" class="order-status" aria-live="polite"></div>
         <div id="paypal-button-container" style="display:none;margin-top:16px"></div>
-        <p class="secure-note">🔒 Deine Zahlungsdaten werden nicht auf dieser Website gespeichert.</p>
+        <p class="secure-note">🔒 Codes werden nicht automatisch an Discord übertragen. Für PSC/Amazon erfolgt die Bestätigung manuell über ein privates Discord-Ticket.</p>
       </div>
       <div class="checkout-summary">
         <small>BESTELLUNG</small>
