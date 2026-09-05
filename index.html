@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+  <!-- PayPal SDK: replace AQ90w9tVdEAylTLgc with your PayPal REST Client ID -->
+<script src="https://www.paypal.com/sdk/js?client-id=AQ90w9tVdEAylTLgc&currency=EUR&intent=capture"></script>
 <meta name="description" content="CHUG TUNES PERFORMANCE – Gaming Performance Store">
 <title>CHUG TUNES PERFORMANCE</title>
 <link rel="stylesheet" href="style.css">
@@ -92,6 +94,7 @@
         <div class="payment-panel" id="panel-amazon"><b>Amazon Card</b><p>Amazon-Gutscheincodes können nicht einfach wie eine normale Karte über GitHub Pages belastet werden. Dafür ist eine passende Zahlungsabwicklung nötig.</p></div>
         <input type="hidden" id="selectedMethod" value="paypal">
         <button class="order-button" id="orderButton">Weiter zur Zahlung →</button>
+        <div id="paypal-button-container" class="paypal-button-container" hidden></div>
         <p class="secure-note">🔒 Deine Zahlungsdaten werden nicht auf dieser Website gespeichert.</p>
       </div>
       <div class="checkout-summary">

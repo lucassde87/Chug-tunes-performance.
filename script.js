@@ -22,7 +22,7 @@ function openCheckout(){
   $("#checkoutModal").classList.add("open");
   document.body.classList.add("modal-open");
 }
-function closeCheckout(){$("#checkoutModal").classList.remove("open");document.body.classList.remove("modal-open")}
+function closeCheckout(){$("#checkoutModal").classList.remove("open");document.body.classList.remove("modal-open");const c=$("#paypal-button-container");if(c){c.hidden=true;c.dataset.rendered="";c.innerHTML="";}const b=$("#orderButton");if(b)b.style.display="";}
 function selectMethod(method){
   document.querySelectorAll('.payment-method').forEach(x=>x.classList.remove('selected'));
   const el=document.querySelector(`[data-method="${method}"]`); if(el) el.classList.add('selected');
@@ -42,14 +42,78 @@ document.querySelectorAll('.payment-method').forEach(b=>b.addEventListener('clic
 $("#orderButton").onclick=()=>{
   const method=$("#selectedMethod").value;
   const email=$("#customerEmail").value.trim();
-  if(!email){alert('Bitte gib deine E-Mail-Adresse ein.');return}
-  if(method==='paypal'){
-    alert('PayPal ist als Zahlungsart vorbereitet. Für echte Zahlungen muss noch deine PayPal-Client-ID/Backend-Verbindung eingetragen werden. Dein PayPal Secret gehört niemals in die Website.');
-  }else if(method==='psc'){
-    alert('Paysafecard ist ausgewählt. Die automatische PSC-Zahlung wird erst aktiv, wenn ein geeigneter Zahlungsanbieter angebunden ist.');
-  }else{
-    alert('Amazon Card ist ausgewählt. Die automatische Gutschein-Zahlung wird erst aktiv, wenn ein geeigneter Zahlungsanbieter angebunden ist.');
+
+  if(!email){
+    alert('Bitte gib deine E-Mail-Adresse ein.');
+    $("#customerEmail").focus();
+    return;
   }
+
+  if(method!=="paypal"){
+    alert(
+      method==="psc"
+        ? "Paysafecard ist ausgewählt. Für echte automatische PSC-Zahlungen muss noch ein unterstützter Zahlungsanbieter angebunden werden."
+        : "Amazon Card ist ausgewählt. Für echte automatische Gutschein-Zahlungen muss noch ein unterstützter Zahlungsanbieter angebunden werden."
+    );
+    return;
+  }
+
+  if(typeof paypal==="undefined"){
+    alert("PayPal konnte nicht geladen werden. Prüfe deine PayPal Client-ID und ob die Website online läuft.");
+    return;
+  }
+
+  const total=cart.reduce((s,p)=>s+p.price,0).toFixed(2);
+  const container=$("#paypal-button-container");
+
+  container.hidden=false;
+  $("#orderButton").style.display="none";
+  container.innerHTML="";
+
+  if(container.dataset.rendered==="true") return;
+
+  paypal.Buttons({
+    style:{
+      layout:"vertical",
+      shape:"rect",
+      label:"paypal"
+    },
+
+    createOrder: (data, actions)=>{
+      return actions.order.create({
+        purchase_units:[{
+          amount:{
+            currency_code:"EUR",
+            value:total
+          },
+          description:"CHUG TUNES PERFORMANCE"
+        }]
+      });
+    },
+
+    onApprove: async (data, actions)=>{
+      const details=await actions.order.capture();
+      alert("Zahlung erfolgreich! Danke, "+(details.payer?.name?.given_name || "für deinen Einkauf")+".");
+
+      closeCheckout();
+      cart.length=0;
+      render();
+      container.hidden=true;
+      container.dataset.rendered="";
+      $("#orderButton").style.display="";
+    },
+
+    onCancel: ()=>{
+      alert("PayPal-Zahlung wurde abgebrochen.");
+    },
+
+    onError:(err)=>{
+      console.error("PayPal Error:",err);
+      alert("Bei der PayPal-Zahlung ist ein Fehler aufgetreten.");
+    }
+  }).render("#paypal-button-container");
+
+  container.dataset.rendered="true";
 };
 selectMethod('paypal');
 render();
